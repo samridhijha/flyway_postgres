@@ -1,0 +1,1 @@
+ALTER TABLE public.address ADD COLUMN postal_code varchar(20);

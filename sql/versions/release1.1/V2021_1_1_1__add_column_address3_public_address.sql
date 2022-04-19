@@ -1,0 +1,1 @@
+ALTER TABLE public.address ADD COLUMN address3 varchar(50);
