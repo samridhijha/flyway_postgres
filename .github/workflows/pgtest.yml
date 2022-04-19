@@ -1,0 +1,34 @@
+name: route
+ 
+on:
+ 
+  push:
+    branches: [ poc ]
+  pull_request:
+    branches: [ poc ]
+ 
+  workflow_dispatch:
+ 
+jobs:
+  clean-build-schema:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ChrisUnwin/flyway-action@master
+        with:
+          url: jdbc:postgresql://ec2-23-20-224-166.compute-1.amazonaws.com:5432/d6gvvbm3os0486
+          user: gstpovyitimiav
+          password: ed9ba4b236e4e34d054b0bcc4bed47592bd050e043e25f8b952672702c473857
+          command: clean
+           
+  build:
+    needs: clean-build-schema
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ChrisUnwin/flyway-action@master
+        with:
+          url: jdbc:postgresql://ec2-23-20-224-166.compute-1.amazonaws.com:5432/d6gvvbm3os0486
+          user: gstpovyitimiav
+          password: ed9ba4b236e4e34d054b0bcc4bed47592bd050e043e25f8b952672702c473857
+          command: migrate
